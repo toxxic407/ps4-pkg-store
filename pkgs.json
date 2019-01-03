@@ -1,0 +1,81 @@
+[{
+		"titleid": "CUSA00000",
+		"contentid": "UP1000-CUSA00000_00-SLUS000000000000",
+		"type": "game",
+		"name": "SNES STATION",
+		"icon": "https://i.imgur.com/tRlZkN7.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/SNES_STATION.pkg"]
+	},
+	{
+		"titleid": "MRPH00001",
+		"contentid": "DE0001-MRPH00001_00-RELEASE000000001",
+		"type": "game",
+		"name": "ps4Gearsystem",
+		"icon": "https://i.imgur.com/cCOwwir.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/SEGA_EMU_V455.pkg"]
+	},
+	{
+		"titleid": "MRPH00002",
+		"contentid": "DE0001-MRPH00002_00-RELEASE000000001",
+		"type": "game",
+		"name": "ps4NES",
+		"icon": "https://i.imgur.com/xhm4xpj.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/NES_EMU_V455.pkg"]
+	},
+	{
+		"titleid": "NPXX66665",
+		"contentid": "ED1633-NPXX66665_00-0000000000000000",
+		"type": "game",
+		"name": "PlisskenDooM 0.4",
+		"icon": "https://i.imgur.com/NtVPFHJ.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/PLISSKENDOOM-v0.4.pkg"]
+	},
+	{
+		"titleid": "NPXX66666",
+		"contentid": "ED1633-NPXX66666_00-0000000000000000",
+		"type": "game",
+		"name": "Brutal PS4 DooM",
+		"icon": "https://i.imgur.com/6hS8DdI.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/BRUTAL_PS4_DOOM.pkg"]
+	},
+	{
+		"titleid": "NPXX51362",
+		"contentid": "ED1633-NPXX51362_00-TER1520000000000",
+		"type": "game",
+		"name": "★ FLAPPY BIRD  ★ By TER152 ★",
+		"icon": "https://i.imgur.com/aOg6kKM.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/FLAPPY_BIRD.pkg"]
+	},
+	{
+		"titleid": "NPXX33382",
+		"contentid": "HW1633-NPXX33382_00-HOMEBREWSSSSSSSS",
+		"type": "game",
+		"name": "File Manager for PS4™",
+		"icon": "https://i.imgur.com/OcaQwiV.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/FS-MANAGER.pkg"]
+	},
+	{
+		"titleid": "NPXX51351",
+		"contentid": "ED1633-NPXX51351_00-0000000000000000",
+		"type": "game",
+		"name": "Soilder Mayham v1",
+		"icon": "https://i.imgur.com/csKFWgU.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/SOLDIER_MAYHEM_V1.pkg"]
+	},
+	{
+		"titleid": "CUSA99900",
+		"contentid": "UP9000-CUSA99900_00-SCUS974900000001",
+		"type": "game",
+		"name": "Streets Of Rage MOD",
+		"icon": "https://i.imgur.com/oaCaWVM.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/STREETS_OF_RAGE_MOD.pkg"]
+	},
+	{
+		"titleid": "NPXX33362",
+		"contentid": "HW1633-NPXX33362_00-HOMEBREWSSSSSSSS",
+		"type": "game",
+		"name": "ORBISMAN (BETA)",
+		"icon": "https://i.imgur.com/ZQpSs5w.png",
+		"links": ["http://www.tgi-12-2.de/pkgs/ORBISMAN_BETA.pkg"]
+	}
+]
