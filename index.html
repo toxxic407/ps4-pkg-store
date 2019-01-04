@@ -96,10 +96,17 @@ color:black;
     font-size: 16px;
     margin: 4px 2px;
     cursor:url(cursor.png), auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 256px;
+	white-space: nowrap;
 }
 
 .game:hover {
-    
+    overflow: initial;
+	text-overflow: initial;
+	width: initial;
+	white-space: initial;
 	padding: 20px 20px;
 }
 
