@@ -285,7 +285,7 @@ function find_task(contentid,type,titleid,gameid)
 						res = JSON.parse(res);
 						if(res.transferred_total == res.length_total)
 						{
-							status(titleid, gameid);
+							status(titleid, type);
 						}
 						else
 						{
@@ -297,7 +297,7 @@ function find_task(contentid,type,titleid,gameid)
 			}
 			else
 			{
-				status(titleid, gameid);
+				status(titleid, type);
 			}
 		}
 	};
@@ -408,7 +408,7 @@ function opengame(url,gameid)
 	xhttp.send();
 }
 
-function status(titleid)
+function status(titleid, type)
 {
 	var http = new XMLHttpRequest();
 	http.open('POST', "http://"+getCookie("PS4IP")+":12800/api/is_exists", true);
