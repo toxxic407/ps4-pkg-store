@@ -414,7 +414,7 @@ function status(titleid)
 	http.open('POST', "http://"+getCookie("PS4IP")+":12800/api/is_exists", true);
 	http.onreadystatechange = function()
 		{
-			if(http.readyState == 4 && http.status == 200) {
+						if(http.readyState == 4 && http.status == 200) {
 			if(http.responseText.includes("false"))
 			{
 				var response = JSON.parse(http.responseText);
@@ -427,21 +427,41 @@ function status(titleid)
 			}
 			if(response.exists != "true")
 			{
-				document.getElementById("status").appendChild(document.createTextNode("status: not installed"));
+				if(type != "patch")
+				{
+					document.getElementById("status").appendChild(document.createTextNode("status: not installed"));
 				
-				spawn_installbutton();
-				spawn_backbutton();
+					spawn_installbutton();
+					spawn_backbutton();
+				}
+				else
+				{
+					document.getElementById("status").appendChild(document.createTextNode("status:  main game not installed"));
+
+					spawn_backbutton();
+				}
 				
 			}
 			else
 			{
-				document.getElementById("status").appendChild(document.createTextNode("status: installed"));
-				document.getElementById("status").appendChild(document.createElement("br"));
-				var size = Math.round(parseInt(response.size)/1000000);
-				document.getElementById("status").appendChild(document.createTextNode("size: "+size+" mb"));
+				if(type != "patch")
+				{
+					document.getElementById("status").appendChild(document.createTextNode("status: installed"));
+					document.getElementById("status").appendChild(document.createElement("br"));
+					var size = Math.round(parseInt(response.size)/1000000);
+					document.getElementById("status").appendChild(document.createTextNode("size: "+size+" mb"));
 				
-				spawn_uninstallbutton();
-				spawn_backbutton();
+					spawn_uninstallbutton();
+					spawn_backbutton();
+				}
+				else
+				{
+					document.getElementById("status").appendChild(document.createTextNode("status: main game installed"));
+				
+					spawn_installbutton();
+					spawn_uninstallbutton();
+					spawn_backbutton();
+				}
 				
 			}
 		}
