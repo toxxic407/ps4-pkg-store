@@ -427,25 +427,42 @@ function status(titleid, type)
 			}
 			if(response.exists != "true")
 			{
-				if(type != "patch")
+				
+				switch(type)
 				{
+					case "game":
 					document.getElementById("status").appendChild(document.createTextNode("status: not installed"));
 				
 					spawn_installbutton();
 					spawn_backbutton();
-				}
-				else
-				{
+					break;
+
+					case "patch":
 					document.getElementById("status").appendChild(document.createTextNode("status:  main game not installed"));
 
+					spawn_backbutton();
+					break;
+					
+					case "theme":
+					document.getElementById("status").appendChild(document.createTextNode("status:  unknown (theme)"));
+
+					spawn_installbutton();
+					spawn_uninstallbutton();
+					spawn_backbutton();
+					break;
+					
+					case "ac":
+					document.getElementById("status").appendChild(document.createTextNode("status:  main game not installed"));
+				
 					spawn_backbutton();
 				}
 				
 			}
 			else
 			{
-				if(type != "patch")
+				switch(type)
 				{
+					case "game":
 					document.getElementById("status").appendChild(document.createTextNode("status: installed"));
 					document.getElementById("status").appendChild(document.createElement("br"));
 					var size = Math.round(parseInt(response.size)/1000000);
@@ -453,16 +470,31 @@ function status(titleid, type)
 				
 					spawn_uninstallbutton();
 					spawn_backbutton();
-				}
-				else
-				{
+					break;
+					
+					case "patch":
+					document.getElementById("status").appendChild(document.createTextNode("status: main game installed"));
+				
+					spawn_installbutton();
+					spawn_uninstallbutton();
+					spawn_backbutton();
+					break;
+					
+					case "theme":
+					document.getElementById("status").appendChild(document.createTextNode("status:  unknown (theme)"));
+
+					spawn_installbutton();
+					spawn_uninstallbutton();
+					spawn_backbutton();
+					break;
+					
+					case "ac":
 					document.getElementById("status").appendChild(document.createTextNode("status: main game installed"));
 				
 					spawn_installbutton();
 					spawn_uninstallbutton();
 					spawn_backbutton();
 				}
-				
 			}
 		}
 	}
