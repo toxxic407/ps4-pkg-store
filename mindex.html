@@ -229,6 +229,14 @@ function checkCookie() {
 	}
 }
 
+function compare(a,b) 
+{
+  if (a.name.toUpperCase() < b.name.toUpperCase())
+    return -1;
+  if (a.name.toUpperCase() > b.name.toUpperCase())
+    return 1;
+  return 0;
+}
 
 function request(url)
 {
@@ -239,6 +247,7 @@ function request(url)
 		if (this.readyState == 4 && this.status == 200)
 		{
 			var response = JSON.parse(xhttp.responseText);
+			response.sort(compare);
 			for (i = 0; i < response.length; i++)
 			{
 				var x = document.createElement("DIV");
