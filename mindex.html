@@ -337,6 +337,7 @@ function opengame(url,gameid)
 		if (this.readyState == 4 && this.status == 200)
 		{
 			var response = JSON.parse(xhttp.responseText);
+			response.sort(compare);
 			
 			var linkstring = "\"";
 			for (i = 0; i < response[gameid].links.length - 1; i++)
