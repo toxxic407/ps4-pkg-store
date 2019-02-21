@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-16">
 <title>TOXXIC's PKG-Store</title>
 <link rel="shortcut icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 <style>
 body {
     font-family: "Lato", sans-serif;
@@ -140,6 +141,38 @@ img {
  var pbt;
  var reopen_game_url;
  var reopen_game_id;
+ var games_json;
+ 
+function search(url)
+{
+	for (i = 0; i < games_json.length; i++)
+	{
+		var element = document.getElementById("game_"+i);
+		if(element != null)
+		{
+			element.parentNode.removeChild(element);
+		}
+	}
+			
+	for (i = 0; i < games_json.length; i++)
+	{
+		if(games_json[i].name.toUpperCase().includes(document.getElementById("searchbar").value.toUpperCase()) || games_json[i].titleid.toUpperCase().includes(document.getElementById("searchbar").value))
+		{
+			var x = document.createElement("DIV");
+			x.setAttribute("id", "game_"+i);
+			x.setAttribute("class", "game");
+			x.setAttribute("onclick", "opengame(\""+url+"\", "+i+")");
+			var y = document.createElement("IMG");
+			y.setAttribute("class", "icon");
+			y.setAttribute("src", games_json[i].icon);
+			var z = document.createTextNode(games_json[i].name);
+			x.appendChild(y);
+			x.appendChild(document.createElement("br"));
+			x.appendChild(z);
+			document.getElementById("center").appendChild(x);
+		}
+	}
+}
  
  function interval(func, wait, times){
     var interv = function(w, t){
@@ -222,10 +255,12 @@ function checkCookie() {
 	
 	if (pkglink == "")
 	{
+		document.getElementById("searchbar").setAttribute("onkeyup", "search(\"pkgs.json\")");
 		request("pkgs.json");
 	}
 	else
 	{
+		document.getElementById("searchbar").setAttribute("onkeyup", "search(\""+pkglink+"\")");
 		request(pkglink)
 	}
 }
@@ -247,9 +282,9 @@ function request(url)
 	{
 		if (this.readyState == 4 && this.status == 200)
 		{
-			var response = JSON.parse(xhttp.responseText);
-			response.sort(compare);
-			for (i = 0; i < response.length; i++)
+			games_json = JSON.parse(xhttp.responseText);
+			games_json.sort(compare);
+			for (i = 0; i < games_json.length; i++)
 			{
 				var x = document.createElement("DIV");
 				x.setAttribute("id", "game_"+i);
@@ -257,8 +292,8 @@ function request(url)
 				x.setAttribute("onclick", "opengame(\""+url+"\", "+i+")");
 				var y = document.createElement("IMG");
 				y.setAttribute("class", "icon");
-				y.setAttribute("src", response[i].icon);
-				var z = document.createTextNode(response[i].name);
+				y.setAttribute("src", games_json[i].icon);
+				var z = document.createTextNode(games_json[i].name);
 				x.appendChild(y);
 				x.appendChild(document.createElement("br"));
 				x.appendChild(z);
@@ -346,6 +381,11 @@ function opengame(url,gameid)
 				linkstring = linkstring+response[gameid].links[i]+"\", \"";
 			}
 			linkstring = linkstring+response[gameid].links[response[gameid].links.length - 1]+"\"";
+						
+			if(document.getElementById("searchbar").placeholder == "Search")
+			{
+				document.getElementById("searchbar").parentNode.removeChild(document.getElementById("search"));
+			}
 	
 			for (i = 0; i < response.length; i++)
 			{
@@ -736,7 +776,11 @@ function get_progress(task_id)
 <div class="main">
 <span style="font-size:30px; position: fixed;" onclick="openNav()">&#9776;</span>
 <center id="center">
-<font size="12"id="headline">PKG'S</font></br>
+<font size="12"id="headline">PKG'S</font></br></br>
+<form class="pure-form">
+<input id="searchbar" type="text" placeholder="Search">
+</form>
+</br>
 </center>
 </div>
 <script>
