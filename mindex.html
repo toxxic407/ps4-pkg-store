@@ -382,7 +382,8 @@ function opengame(url,gameid)
 			}
 			linkstring = linkstring+response[gameid].links[response[gameid].links.length - 1]+"\"";
 						
-			if(document.getElementById("searchbar").placeholder == "Search")
+			var element = document.getElementById("searchbar");
+			if(element != null)
 			{
 				document.getElementById("searchbar").parentNode.removeChild(document.getElementById("searchbar"));
 			}
