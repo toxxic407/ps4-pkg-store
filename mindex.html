@@ -133,6 +133,7 @@ img {
 </style>
 <script>
 //global vars
+ var categories = [];
  var install_button;
  var uninstall_button;
  var control_button;
@@ -142,9 +143,41 @@ img {
  var reopen_game_url;
  var reopen_game_id;
  var games_json;
+ var pkglink;
  
+function set_category(category)
+{
+	for(i = 0; i < categories.length; i++)
+	{
+		document.getElementById("filter_"+i).checked = false;
+	}
+	document.getElementById("content").hidden = true;
+	document.getElementById("nav_button").hidden = true;
+	document.getElementById("filter_"+ categories.indexOf(category)).checked = true;
+	
+	if (pkglink == "")
+	{
+		search("pkgs.json");
+	}
+	else
+	{
+		search(pkglink)
+	}
+}
+
 function search(url)
 {
+
+	//read checkboxes
+	var filters = [];
+	for(i = 0; i < categories.length; i++)
+	{
+		if(document.getElementById("filter_"+i).checked == true)
+		{
+			filters.push(categories[i]);
+		}
+	}
+	//remove everything
 	for (i = 0; i < games_json.length; i++)
 	{
 		var element = document.getElementById("game_"+i);
@@ -153,10 +186,10 @@ function search(url)
 			element.parentNode.removeChild(element);
 		}
 	}
-			
+
 	for (i = 0; i < games_json.length; i++)
 	{
-		if(games_json[i].name.toUpperCase().includes(document.getElementById("searchbar").value.toUpperCase()) || games_json[i].titleid.toUpperCase().includes(document.getElementById("searchbar").value))
+		if(games_json[i].categories.some(r=> filters.includes(r)) && (games_json[i].name.toUpperCase().includes(document.getElementById("searchbar").value.toUpperCase()) || games_json[i].titleid.toUpperCase().includes(document.getElementById("searchbar").value)) )
 		{
 			var x = document.createElement("DIV");
 			x.setAttribute("id", "game_"+i);
@@ -251,16 +284,16 @@ function checkCookie() {
 			}
     }
 	
-	var pkglink = getCookie("pkglink");
+	pkglink = getCookie("pkglink");
 	
 	if (pkglink == "")
 	{
-		document.getElementById("searchbar").setAttribute("onkeyup", "search(\"pkgs.json\")");
+		document.getElementById("searchbar").setAttribute("onkeyup", "search(\"pkgs.json\", false)");
 		request("pkgs.json");
 	}
 	else
 	{
-		document.getElementById("searchbar").setAttribute("onkeyup", "search(\""+pkglink+"\")");
+		document.getElementById("searchbar").setAttribute("onkeyup", "search(\""+pkglink+"\", false)");
 		request(pkglink)
 	}
 }
@@ -284,8 +317,18 @@ function request(url)
 		{
 			games_json = JSON.parse(xhttp.responseText);
 			games_json.sort(compare);
+			//populate pkgs
 			for (i = 0; i < games_json.length; i++)
 			{
+				//find all categories
+				for(j= 0; j < games_json[i].categories.length; j++)
+				{
+					if(!categories.includes(games_json[i].categories[j]))
+					{
+						categories.push(games_json[i].categories[j])
+					}
+				}
+				
 				var x = document.createElement("DIV");
 				x.setAttribute("id", "game_"+i);
 				x.setAttribute("class", "game");
@@ -298,6 +341,33 @@ function request(url)
 				x.appendChild(document.createElement("br"));
 				x.appendChild(z);
 				document.getElementById("center").appendChild(x);
+			}
+			
+			//populate filters
+			for(i = 0; i < categories.length; i++)
+			{
+				var x = document.createElement("DIV");
+				x.setAttribute("class", "filter")
+				var y = document.createElement("INPUT");
+				y.setAttribute("checked", "true");
+				y.setAttribute("class", "setcursor");
+				if (pkglink == "")
+				{
+					y.setAttribute("onclick", "search(\"pkgs.json\", true)");
+				}
+				else
+				{
+					y.setAttribute("onclick", "search(\""+pkglink+"\", true)");
+				}
+				y.setAttribute("id", "filter_"+i);
+				y.setAttribute("type", "checkbox");
+				var z = document.createElement("LABEL");
+				z.setAttribute("class", "setcursor");
+				z.innerText = categories[i] + ": ";
+				z.setAttribute("for", y.id)
+				x.appendChild(z);
+				x.appendChild(y);
+				document.getElementById("filter").appendChild(x);
 			}
 		}
 	};
@@ -397,6 +467,12 @@ function opengame(url,gameid)
 				}
 			}
 				element = document.getElementById("headline");
+				if(element != null)
+				{
+				element.parentNode.removeChild(element);
+				}
+				
+				element = document.getElementById("filter");
 				if(element != null)
 				{
 				element.parentNode.removeChild(element);
@@ -775,13 +851,19 @@ function get_progress(task_id)
   <a href="help.html">Help</a>
 </div>
 <div class="main">
-<span style="font-size:30px; position: fixed;" onclick="openNav()">&#9776;</span>
+<span id ="nav_button" style="font-size:30px; position: fixed;" onclick="openNav()">&#9776;</span>
 <center id="center">
+<div id="content">
 <font size="12"id="headline">PKG'S</font></br></br>
 <form class="pure-form">
 <input id="searchbar" type="text" placeholder="Search">
 </form>
 </br>
+<div id="filter">
+<font size="6"id="headline">Filter by Categories</font></br></br>
+</div>
+</br>
+</div>
 </center>
 </div>
 <script>
