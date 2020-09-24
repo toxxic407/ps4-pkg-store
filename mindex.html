@@ -144,8 +144,9 @@ img {
  var reopen_game_id;
  var games_json;
  var pkglink;
+ //var category = "Utility";
  
-function set_category(category)
+function set_category()
 {
 	for(i = 0; i < categories.length; i++)
 	{
@@ -368,6 +369,11 @@ function request(url)
 				x.appendChild(z);
 				x.appendChild(y);
 				document.getElementById("filter").appendChild(x);
+			}
+			
+			if(typeof category !== 'undefined')
+			{
+			set_category();
 			}
 		}
 	};

@@ -161,15 +161,17 @@ img {
  var reopen_game_id;
  var games_json;
  var pkglink;
+ //var category = "Utility";
 
-function set_category(category)
+function set_category()
 {
 	for(i = 0; i < categories.length; i++)
 	{
 		document.getElementById("filter_"+i).checked = false;
 	}
-	document.getElementById("content").hidden = true;
-	document.getElementById("nav_button").hidden = true;
+	//document.getElementById("content").hidden = true;
+	//document.getElementById("nav_button").hidden = true;
+	document.getElementById("filter").hidden = true;
 	document.getElementById("filter_"+ categories.indexOf(category)).checked = true;
 	
 	if (pkglink == "")
@@ -385,6 +387,11 @@ function request(url)
 				x.appendChild(z);
 				x.appendChild(y);
 				document.getElementById("filter").appendChild(x);
+			}
+			
+			if(typeof category !== 'undefined')
+			{
+			set_category();
 			}
 		}
 	};
