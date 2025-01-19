@@ -4,7 +4,7 @@ An improved and refractored Version can be found included in the Brew Repository
 
 Simple static Frontend for Flatz's Remote PKG Installer.
 
-The project has support for custom pkg-repos(for more information visit http://tgi-12-2.de/help.html), optional visual customisation and optimization for mobile devices.
+The project has support for custom pkg-repos, optional visual customisation and optimization for mobile devices.
 
 Feel free to use, host and modify this project!
 
